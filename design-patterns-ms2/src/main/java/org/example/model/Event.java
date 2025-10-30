@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 import java.time.LocalDateTime;
 
@@ -42,62 +42,3 @@ public abstract class Event {
     public void setAvailableTickets(int availableTickets) { this.availableTickets = availableTickets; }
 }
 
-class Concert extends Event {
-    private String artist;
-    private String genre;
-
-    @Override
-    public double getPrice() {
-        return basePrice;
-    }
-
-    @Override
-    public String getEventType() {
-        return "Concert";
-    }
-
-    public String getArtist() { return artist; }
-    public void setArtist(String artist) { this.artist = artist; }
-    public String getGenre() { return genre; }
-    public void setGenre(String genre) { this.genre = genre; }
-}
-
-class Workshop extends Event {
-    private String instructor;
-    private int maxParticipants;
-
-    @Override
-    public double getPrice() {
-        return basePrice;
-    }
-
-    @Override
-    public String getEventType() {
-        return "Workshop";
-    }
-
-    public String getInstructor() { return instructor; }
-    public void setInstructor(String instructor) { this.instructor = instructor; }
-    public int getMaxParticipants() { return maxParticipants; }
-    public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; }
-}
-
-class Conference extends Event {
-    private String[] speakers;
-    private String[] tracks;
-
-    @Override
-    public double getPrice() {
-        return basePrice;
-    }
-
-    @Override
-    public String getEventType() {
-        return "Conference";
-    }
-
-    public String[] getSpeakers() { return speakers; }
-    public void setSpeakers(String[] speakers) { this.speakers = speakers; }
-    public String[] getTracks() { return tracks; }
-    public void setTracks(String[] tracks) { this.tracks = tracks; }
-}
