@@ -1,5 +1,16 @@
 package org.example;
 
+import org.example.database.DatabaseConnection;
+import org.example.decorator.MerchandiseBundleDecorator;
+import org.example.decorator.VIPAccessDecorator;
+import org.example.factory.EventFactory;
+import org.example.model.Event;
+import org.example.model.Ticket;
+import org.example.model.TicketStatus;
+import org.example.observer.AnalyticsObserver;
+import org.example.observer.EmailNotificationObserver;
+import org.example.strategy.*;
+
 import java.time.LocalDateTime;
 
 /**

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.model;
+
+import org.example.observer.TicketSubject;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -115,10 +117,3 @@ public class Ticket {
     public void setAttendeePhone(String attendeePhone) { this.attendeePhone = attendeePhone; }
 }
 
-enum TicketStatus {
-    BOOKED,
-    CONFIRMED,
-    CANCELLED,
-    REFUNDED,
-    USED
-}
