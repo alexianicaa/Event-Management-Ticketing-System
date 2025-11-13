@@ -60,9 +60,6 @@ This architecture is suitable for a small team, where fast development and stron
 - Monolith contains internal modules: User, Event, Ticketing, Payment, Analytics  
 - All modules share the same database  
 - Frontend communicates only with the monolith  
-
-> *Diagrams can be created in StarUML or Mermaid and inserted here as images.*
-
 ---
 
 ### 1.5 Pros and Cons
