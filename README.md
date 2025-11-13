@@ -60,19 +60,27 @@ This architecture is suitable for a small team, where fast development and stron
 ---
 
 ### 1.5 Pros and Cons
-
 **Advantages:**
-- Simple development: Single codebase  
-- Easy testing: End-to-end tests straightforward  
-- Strong consistency: ACID transactions across ticket purchases  
-- Low operational overhead: One backend + database  
-- Fast time to market: Quickly build MVP  
+- **Simple Development**: Single codebase, easy to understand and navigate  
+- **Easy Testing**: End-to-end tests straightforward  
+- **Simple Deployment**: Only one app server to deploy and manage  
+- **Strong Consistency**: ACID transactions across ticket purchases and payments  
+- **Low Operational Overhead**: One backend + database  
+- **Perfect for Small Team**: 3 developers can work efficiently  
+- **Fast Time to Market**: Quickly build MVP to showcase core functionality  
 
 **Disadvantages:**
-- Scaling limitations: Must scale entire app even if only one module needs it  
-- Technology lock-in: Entire system uses same framework  
-- Single point of failure: One bug can crash the app  
-- Long-term maintenance: Codebase can become complex as features grow  
+- **Scaling Limitations**: Must scale entire application even if only Ticketing or Payment needs more resources  
+- **Technology Lock-in**: Entire system must use same language/framework  
+- **Single Point of Failure**: One bug can crash the whole system  
+- **Deployment Risk**: Every update risks the entire application  
+- **Long-term Maintenance**: As features grow (e.g., real-time notifications, recommendations), codebase can become unwieldy  
+
+**Project-Specific Considerations:**
+- **Ideal for early launch** or prototype of Event Management & Ticketing System  
+- **Can handle first 5,000–10,000 users** without performance issues  
+- **Payment transactions benefit from ACID guarantees**  
+- **Infrastructure costs remain low initially**
 
 ---
 
@@ -132,15 +140,22 @@ This architecture enables independent scaling, parallel development, and high av
 ### 2.5 Pros and Cons
 
 **Advantages:**
-- Independent scaling for high-demand services  
-- Technology flexibility per service  
-- Fault isolation: failure in one service does not crash others  
-- Parallel development by multiple teams  
+- **Independent Scaling**: Services can scale individually based on load  
+- **Technology Flexibility**: Different services can use different languages or frameworks  
+- **Fault Isolation**: Failure in one service does not crash the entire system  
+- **Parallel Development**: Multiple teams can work on separate services  
+- **Better Long-Term Maintenance**: Smaller codebases per service  
 
 **Disadvantages:**
-- Increased complexity: monitoring, orchestration needed  
-- Inter-service communication overhead  
-- Distributed database consistency requires careful handling  
+- **Increased Complexity**: More moving parts, requires orchestration and monitoring  
+- **Inter-Service Communication Overhead**: Network latency and failure handling needed  
+- **Deployment Complexity**: Multiple services require CI/CD and containerization  
+- **Data Consistency**: Distributed databases require careful handling of consistency  
+
+**Project-Specific Considerations:**
+- Suitable for scaling Ticketing and Payment services independently during peak demand  
+- Can support larger user base (10,000+ users) more efficiently than Monolith
+- Requires more infrastructure and DevOps effort for deployment  
 
 ---
 
@@ -197,14 +212,22 @@ This architecture improves decoupling, scalability, and responsiveness.
 ### 3.5 Pros and Cons
 
 **Advantages:**
-- High decoupling: services operate independently  
-- Highly scalable and resilient  
-- Easy to add new services without impacting existing ones  
+- **High Scalability**: Services can scale independently without affecting others  
+- **Loose Coupling**: Modules are decoupled, making maintenance easier  
+- **Asynchronous Processing**: System can handle high load efficiently; frontend is not blocked by long operations  
+- **Extensibility**: Adding new services (e.g., recommendations, chat) only requires subscribing to events  
+- **Fault Isolation**: Failure in one service does not break the whole system  
 
 **Disadvantages:**
-- Increased system complexity  
-- Debugging is more difficult due to async communication  
-- Requires robust event broker infrastructure  
+- **Complexity**: Requires careful orchestration, monitoring, and logging  
+- **Eventual Consistency**: Data may not be immediately consistent across services  
+- **Debugging Difficulty**: Harder to trace events through the system  
+- **Infrastructure Costs**: Event Broker, message queues, and multiple services increase deployment overhead  
+
+**Project-Specific Considerations:**
+- **Excellent for scaling Ticketing and Payment services** during high-demand events  
+- **Allows real-time notifications and analytics dashboards**  
+- **Requires more DevOps effort** than Monolithic architecture
 
 ---
 
