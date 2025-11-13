@@ -51,15 +51,11 @@ This architecture is suitable for a small team, where fast development and stron
 
 **Deployment Diagram:**
 ![](monolith_deployment.png)
-- Single server running frontend + backend  
-- Single PostgreSQL database  
-- Optional external payment gateway  
+
 
 **Component Diagram:**
 ![](monolith_component.png)
-- Monolith contains internal modules: User, Event, Ticketing, Payment, Analytics  
-- All modules share the same database  
-- Frontend communicates only with the monolith  
+ 
 ---
 
 ### 1.5 Pros and Cons
@@ -87,3 +83,78 @@ This architecture is suitable for a small team, where fast development and stron
 - Infrastructure costs remain low initially  
 
 ---
+
+## 2. Microservices Architecture
+
+### 2.1 Description
+
+The Event Management & Ticketing System is decomposed into multiple independent services, each responsible for a specific domain functionality. Each service has its own database or schema, and services communicate through REST APIs (or gRPC) to coordinate operations.  
+
+This architecture is suitable for scaling individual services independently, enabling multiple developers or teams to work in parallel, and supporting high availability and fault tolerance.
+
+---
+
+### 2.2 Key Components
+
+| Microservice | Responsibilities | Patterns |
+|--------------|-----------------|----------------|
+| **User Service** | Handles user registration, authentication, roles (Attendee / Organizer) | Factory pattern for creating user types |
+| **Event Service** | Create, update, delete, and search events | Builder pattern for complex event creation |
+| **Ticketing Service** | Issue tickets, validate QR codes, manage ticket types | Strategy pattern for different ticketing rules |
+| **Payment Service** | Handle payments through multiple gateways | Proxy pattern for external payment integration |
+| **Analytics Service** | Tracks sales, attendance, and user behavior | Event sourcing for asynchronous analytics |
+| **API Gateway** | Single entry point for frontend clients | Routes requests to appropriate microservices |
+| **Frontend Interface** | Web UI or mobile client communicates with API Gateway | |
+
+---
+
+### 2.3 Structure & Data Flow
+
+**System Structure:**
+- Each microservice is an independent deployable unit (containerized or standalone)
+- Microservices communicate via HTTP REST APIs (or optionally gRPC)
+- Each service manages its own database (or schema) to ensure decoupling
+- API Gateway handles routing, authentication, and aggregation for the frontend
+
+**Data Flow Example (Ticket Purchase):**
+1. Attendee selects event → request sent to **API Gateway**  
+2. **Event Service** validates event availability  
+3. **Ticketing Service** generates ticket and validation info  
+4. **Payment Service** processes payment via Proxy → external gateway  
+5. Each service updates its own database  
+6. Confirmation response sent to Attendee via API Gateway  
+7. **Analytics Service** asynchronously logs sale and attendance  
+
+---
+
+### 2.4 Architecture Diagrams
+
+**Deployment Diagram:**
+![](microservices_deployment.png)
+
+**Component Diagram:**
+![](microservices_components.png)
+
+
+---
+
+### 2.5 Pros and Cons
+
+**Advantages:**
+- **Independent Scaling**: Services can scale individually based on load  
+- **Technology Flexibility**: Different services can use different languages or frameworks  
+- **Fault Isolation**: Failure in one service does not crash the entire system  
+- **Parallel Development**: Multiple teams can work on separate services  
+- **Better Long-Term Maintenance**: Smaller codebases per service  
+
+**Disadvantages:**
+- **Increased Complexity**: More moving parts, requires orchestration and monitoring  
+- **Inter-Service Communication Overhead**: Network latency and failure handling needed  
+- **Deployment Complexity**: Multiple services require CI/CD and containerization  
+- **Data Consistency**: Distributed databases require careful handling of consistency  
+
+**Project-Specific Considerations:**
+- Suitable for scaling Ticketing and Payment services independently during peak demand  
+- Can support larger user base (10,000+ users) more efficiently than Monolith  
+- Requires more infrastructure and DevOps effort for deployment  
+
