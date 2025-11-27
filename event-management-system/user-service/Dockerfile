@@ -1,5 +1,9 @@
 # ---- Stage 1: Build ----
+<<<<<<< HEAD
 FROM eclipse-temurin:17-jdk AS builder
+=======
+FROM eclipse-temurin:21-jdk AS builder
+>>>>>>> 4f479aa (implementation)
 
 WORKDIR /app
 
@@ -12,7 +16,11 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # ---- Stage 2: Run ----
+<<<<<<< HEAD
 FROM eclipse-temurin:17-jre
+=======
+FROM eclipse-temurin:21-jre
+>>>>>>> 4f479aa (implementation)
 
 WORKDIR /app
 

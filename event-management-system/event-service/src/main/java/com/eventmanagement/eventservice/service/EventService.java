@@ -35,6 +35,11 @@ public class EventService {
         // Use EventFactoryService to create event
         Event event = eventFactoryService.createEventByType(request);
 
+<<<<<<< HEAD
+=======
+        event.setStatus(EventStatus.PUBLISHED);
+
+>>>>>>> 4f479aa (implementation)
         // Save event
         Event savedEvent = eventRepository.save(event);
         System.out.println("Event saved with ID: " + savedEvent.getId());

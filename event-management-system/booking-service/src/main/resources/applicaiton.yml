@@ -22,10 +22,17 @@ spring:
 
 # Feign Client Configuration
 user-service:
+<<<<<<< HEAD
   url: http://localhost:8081
 
 event-service:
   url: http://localhost:8082
+=======
+  url: http://user-service:8081
+
+event-service:
+  url: http://event-service:8082
+>>>>>>> 4f479aa (implementation)
 
 # Logging
 logging:

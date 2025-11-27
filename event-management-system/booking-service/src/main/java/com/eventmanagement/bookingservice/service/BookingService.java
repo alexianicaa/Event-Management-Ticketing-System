@@ -61,7 +61,10 @@ public class BookingService {
                 .eventId(request.getEventId())
                 .attendeeId(request.getAttendeeId())
                 .attendeeEmail(user.getEmail())
+<<<<<<< HEAD
                 .attendeePhone(user.getPhone())
+=======
+>>>>>>> 4f479aa (implementation)
                 .price(finalPrice)
                 .status(TicketStatus.BOOKED)
                 .paymentMethod(request.getPayment().getPaymentMethod())
