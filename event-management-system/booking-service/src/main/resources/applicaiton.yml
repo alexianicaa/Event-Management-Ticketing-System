@@ -1,0 +1,35 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: booking-service
+  
+  datasource:
+    url: jdbc:postgresql://postgres-booking:5432/booking_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+# Feign Client Configuration
+user-service:
+  url: http://localhost:8081
+
+event-service:
+  url: http://localhost:8082
+
+# Logging
+logging:
+  level:
+    com.eventmanagement: DEBUG
+    org.springframework.web: INFO
+    org.springframework.cloud.openfeign: DEBUG
