@@ -22,7 +22,11 @@ spring:
 
 # Feign Client Configuration for User Service
 user-service:
+<<<<<<< HEAD
   url: http://localhost:8081
+=======
+  url: http://user-service:8081
+>>>>>>> 4f479aa (implementation)
 
 # Logging
 logging:

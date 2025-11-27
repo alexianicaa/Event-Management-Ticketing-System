@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 version: '3.8'
 
+=======
+>>>>>>> 4f479aa (implementation)
 services:
   # PostgreSQL Databases
   postgres-user:
@@ -89,6 +92,10 @@ services:
     ports:
       - "8083:8083"
     environment:
+<<<<<<< HEAD
+=======
+      SERVER_PORT: 8083
+>>>>>>> 4f479aa (implementation)
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-booking:5432/booking_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres

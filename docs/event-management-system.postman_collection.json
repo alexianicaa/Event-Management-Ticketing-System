@@ -1,0 +1,992 @@
+{
+	"info": {
+		"_postman_id": "3c2823f3-db17-47b9-8f77-4d9cec1ab3a0",
+		"name": "event-management-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50282916",
+		"_collection_link": "https://roman-gulida-3060669.postman.co/workspace/Roman-Gulida's-Workspace~877001db-4055-4e9d-84a0-0992bfa28d2c/collection/50282916-3c2823f3-db17-47b9-8f77-4d9cec1ab3a0?action=share&source=collection_link&creator=50282916"
+	},
+	"item": [
+		{
+			"name": "U-Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/auth/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"auth",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "U-Register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"john_doe\",\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"password123\",\r\n  \"fullName\": \"John Doe\",\r\n  \"role\": \"ATTENDEE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/auth/register\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"auth",
+						"register\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "U-Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"usernameOrEmail\": \"john_doe\",\r\n  \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "U-Get user by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJBVFRFTkRFRSIsInN1YiI6ImpvaG5fZG9lIiwiaWF0IjoxNzAwNzQwOTIyLCJleHAiOjE3MDA4MjczMjJ9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "U-Get user by username",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJBVFRFTkRFRSIsInN1YiI6ImpvaG5fZG9lIiwiaWF0IjoxNzAwNzQwOTIyLCJleHAiOjE3MDA4MjczMjJ9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/users/username/john_doe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"users",
+						"username",
+						"john_doe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "U-Get user by role",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJBVFRFTkRFRSIsInN1YiI6ImpvaG5fZG9lIiwiaWF0IjoxNzAwNzQwOTIyLCJleHAiOjE3MDA4MjczMjJ9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/users/role/ORGANIZER",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"users",
+						"role",
+						"ORGANIZER"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "U-Validate user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/users/1/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"users",
+						"1",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "U-Validate user role",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/users/1/validate-role/ORGANIZER",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"users",
+						"1",
+						"validate-role",
+						"ORGANIZER"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/events/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Create Concert",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"eventType\": \"CONCERT\",\r\n  \"title\": \"Rock Night 2025\",\r\n  \"description\": \"An amazing rock concert featuring top artists\",\r\n  \"eventDateTime\": \"2025-12-15T20:00:00\",\r\n  \"location\": \"Madison Square Garden, New York\",\r\n  \"basePrice\": 50.0,  \r\n  \"availableTickets\": 5000,\r\n  \"organizerId\": {{organizer_id}},\r\n  \"artist\": \"The Rolling Stones\",\r\n  \"genre\": \"Rock\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Create Workshop",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"eventType\": \"WORKSHOP\",\r\n  \"title\": \"Java Spring Boot Masterclass\",\r\n  \"description\": \"Advanced Spring Boot development workshop\",\r\n  \"eventDateTime\": \"2025-11-30T10:00:00\",\r\n  \"location\": \"Tech Hub, San Francisco\",\r\n  \"basePrice\": 150.0,\r\n  \"availableTickets\": 50,\r\n  \"organizerId\": {{organizer_id}},\r\n  \"instructor\": \"John Smith\",\r\n  \"maxParticipants\": 50\r\n}\r\n       ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Create Conference",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"eventType\": \"CONFERENCE\",\r\n  \"title\": \"Tech Summit 2025\",\r\n  \"description\": \"Annual technology conference with industry leaders\",\r\n  \"eventDateTime\": \"2026-01-10T09:00:00\",\r\n  \"location\": \"Convention Center, Seattle\",\r\n  \"basePrice\": 300.0,\r\n  \"availableTickets\": 1000,\r\n  \"organizerId\": {{organizer_id}},\r\n  \"speakers\": [\"Elon Musk\", \"Satya Nadella\", \"Sundar Pichai\"],\r\n  \"tracks\": [\"AI & Machine Learning\", \"Cloud Computing\", \"Cybersecurity\"]\r\n}\r\n        ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Get event by ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/events/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Get event with VIP",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/events/1?vip=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"1"
+					],
+					"query": [
+						{
+							"key": "vip",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Get event with Merch",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/events/1?merchandise=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"1"
+					],
+					"query": [
+						{
+							"key": "merchandise",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Get Event with VIP + Merch",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/events/1?vip=true&merchandise=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"1"
+					],
+					"query": [
+						{
+							"key": "vip",
+							"value": "true"
+						},
+						{
+							"key": "merchandise",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Get all events",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"eventType\": \"CONFERENCE\",\r\n  \"title\": \"Tech Summit 2025\",\r\n  \"description\": \"Annual technology conference with industry leaders\",\r\n  \"eventDateTime\": \"2026-01-10T09:00:00\",\r\n  \"location\": \"Convention Center, Seattle\",\r\n  \"basePrice\": 300.0,\r\n  \"availableTickets\": 1000,\r\n  \"organizerId\": {{organizer_id}},\r\n  \"speakers\": [\"Elon Musk\", \"Satya Nadella\", \"Sundar Pichai\"],\r\n  \"tracks\": [\"AI & Machine Learning\", \"Cloud Computing\", \"Cybersecurity\"]\r\n}\r\n        "
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Get events by organizer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/events/organizer/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"organizer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Get published events",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/events/published",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"published"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Publish event",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/events/1/status?status=PUBLISHED",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"1",
+						"status"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "PUBLISHED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Update available tickets",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/events/1/tickets?reduce=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"1",
+						"tickets"
+					],
+					"query": [
+						{
+							"key": "reduce",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E-Delete event",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/events/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"events",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/bookings/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Book Ticket CCard",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventId\": 1,\r\n    \"attendeeId\": 1,\r\n    \"payment\": { \r\n        \"paymentMethod\": \"CREDIT_CARD\",\r\n        \"cardNumber\": \"1234567890123456\",\r\n        \"cvv\": \"123\",\r\n        \"expiryDate\": \"12/26\",\r\n        \"cardHolderName\": \"John Doe\"\r\n        },\r\n    \"withVip\": false,\r\n    \"withMerchandise\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Book Ticket PayPal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventId\": 1,\r\n    \"attendeeId\": 1,\r\n    \"payment\": {\r\n        \"paymentMethod\": \"PAYPAL\",\r\n        \"email\": \"john.doe@example.com\",\r\n        \"token\": \"paypal-token-xyz123\"\r\n    },\r\n    \"withVip\": false,\r\n    \"withMerchandise\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Book Ticket DWallet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventId\": 1,\r\n    \"attendeeId\": 1,\r\n    \"payment\": {\r\n        \"paymentMethod\": \"DIGITAL_WALLET\",\r\n        \"walletId\": \"wallet-abc-def-123\",\r\n        \"provider\": \"ApplePay\",\r\n        \"deviceId\": \"device-iphone-xyz\"\r\n    },\r\n    \"withVip\": false,\r\n    \"withMerchandise\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Book VIP Ticket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventId\":1,\r\n    \"attendeeId\": 1,\r\n    \"payment\": {\r\n        \"paymentMethod\": \"CREDIT_CARD\",\r\n        \"cardNumber\": \"1234567890123456\",\r\n        \"cvv\": \"123\",\r\n        \"expiryDate\": \"12/26\",\r\n        \"cardHolderName\": \"John Doe\"\r\n    },\r\n    \"withVip\": true,\r\n    \"withMerchandise\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Book VIP+M Ticket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventId\":1,\r\n    \"attendeeId\": 1,\r\n    \"payment\": {\r\n        \"paymentMethod\": \"PAYPAL\",\r\n        \"email\": \"john.doe@example.com\",\r\n        \"token\": \"paypal-token-xyz123\"\r\n    },\r\n    \"withVip\": true,\r\n    \"withMerchandise\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Get Ticket by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/bookings/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Get Tickets by Attendee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/bookings/attendee/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings",
+						"attendee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Get Tickets by Event",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/bookings/event/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings",
+						"event",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Cancel Ticket",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/bookings/1/cancel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings",
+						"1",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Refund Ticket",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/bookings/1/refund",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings",
+						"1",
+						"refund"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B-Get Event Analytics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/api/bookings/analytics/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"bookings",
+						"analytics",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "uBaseURL",
+			"value": ""
+		},
+		{
+			"key": "eBaseURL",
+			"value": ""
+		},
+		{
+			"key": "bBaseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

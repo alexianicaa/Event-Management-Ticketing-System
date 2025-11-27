@@ -13,7 +13,10 @@ public class UserResponse {
     private String username;
     private String email;
     private String fullName;
+<<<<<<< HEAD
     private String phone;
+=======
+>>>>>>> 4f479aa (implementation)
     private String role;
     private Boolean active;
 }
