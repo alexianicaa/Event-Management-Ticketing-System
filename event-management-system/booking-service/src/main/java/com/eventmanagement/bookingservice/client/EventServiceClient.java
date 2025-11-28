@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 // Feign Client to communicate with Event Service
-@FeignClient(name = "event-service", url = "http://localhost:8082")
+@FeignClient(name = "event-service", url = "http://event-service:8082")
 public interface EventServiceClient {
 
     @GetMapping("/api/events/{id}")

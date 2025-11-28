@@ -32,9 +32,6 @@ public class Ticket {
     @Column(name = "attendee_email", nullable = false)
     private String attendeeEmail;
 
-    @Column(name = "attendee_phone")
-    private String attendeePhone;
-
     @Column(nullable = false)
     private Double price;
 
