@@ -27,19 +27,19 @@ jobs:
           cache: 'maven'
 
       - name: Build User Service
-        working-directory: ./user-service
+        working-directory: ./event-management-system/user-service
         run: |
           chmod +x mvnw
           ./mvnw clean package -DskipTests
 
       - name: Build Event Service
-        working-directory: ./event-service
+        working-directory: ./event-management-system/event-service
         run: |
           chmod +x mvnw
           ./mvnw clean package -DskipTests
 
       - name: Build Booking Service
-        working-directory: ./booking-service
+        working-directory: ./event-management-system/booking-service
         run: |
           chmod +x mvnw
           ./mvnw clean package -DskipTests
@@ -49,9 +49,9 @@ jobs:
         with:
           name: microservices-jars
           path: |
-            user-service/target/*.jar
-            event-service/target/*.jar
-            booking-service/target/*.jar
+            event-management-system/user-service/target/*.jar
+            event-management-system/event-service/target/*.jar
+            event-management-system/booking-service/target/*.jar
           retention-days: 5
 
   # Job 2: Build Docker Images
@@ -70,8 +70,8 @@ jobs:
       - name: Build User Service Image
         uses: docker/build-push-action@v5
         with:
-          context: ./user-service
-          file: ./user-service/Dockerfile
+          context: ./event-management-system/user-service
+          file: ./event-management-system/user-service/Dockerfile
           push: false
           tags: event-management-user-service:latest
           cache-from: type=gha
@@ -80,8 +80,8 @@ jobs:
       - name: Build Event Service Image
         uses: docker/build-push-action@v5
         with:
-          context: ./event-service
-          file: ./event-service/Dockerfile
+          context: ./event-management-system/event-service
+          file: ./event-management-system/event-service/Dockerfile
           push: false
           tags: event-management-event-service:latest
           cache-from: type=gha
@@ -90,8 +90,8 @@ jobs:
       - name: Build Booking Service Image
         uses: docker/build-push-action@v5
         with:
-          context: ./booking-service
-          file: ./booking-service/Dockerfile
+          context: ./event-management-system/booking-service
+          file: ./event-management-system/booking-service/Dockerfile
           push: false
           tags: event-management-booking-service:latest
           cache-from: type=gha
@@ -109,16 +109,19 @@ jobs:
 
       # Create deployment environment
       - name: Set up Docker Compose
+        working-directory: ./event-management-system
         run: |
           docker --version
           docker-compose --version
 
       - name: Validate Docker Compose Configuration
+        working-directory: ./event-management-system
         run: |
           docker-compose config
 
       # Start services
       - name: Deploy Services with Docker Compose
+        working-directory: ./event-management-system  
         run: |
           echo "Starting deployment..."
           docker-compose up -d --build
@@ -146,6 +149,7 @@ jobs:
           echo "RabbitMQ is healthy"
 
       - name: Show Running Containers
+        working-directory: ./event-management-system
         run: |
           echo "Running containers:"
           docker ps
@@ -153,15 +157,17 @@ jobs:
       - name: Show Service Logs
         if: failure()
         run: |
-          echo "User Service Logs:"
-          docker logs user-service --tail 50
+          docker logs user-service --tail 50 || echo "User service not found"
           echo "Event Service Logs:"
-          docker logs event-service --tail 50
+          docker logs event-service --tail 50 || echo "Event service not found"
           echo "Booking Service Logs:"
-          docker logs booking-service --tail 50
+          docker logs booking-service --tail 50 || echo "Booking service not found"
+          echo "RabbitMQ Logs:"
+          docker logs rabbitmq --tail 50 || echo "RabbitMQ not found"
 
       - name: Cleanup
         if: always()
+        working-directory: ./event-management-system
         run: |
           docker-compose down -v
           echo "Cleanup completed"
