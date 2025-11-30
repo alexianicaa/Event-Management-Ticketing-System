@@ -1,0 +1,145 @@
+services:
+  # PostgreSQL Databases
+  postgres-user:
+    image: postgres:15-alpine
+    container_name: postgres-user-db
+    environment:
+      POSTGRES_DB: user_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+    networks:
+      - event-management-network
+
+  postgres-event:
+    image: postgres:15-alpine
+    container_name: postgres-event-db
+    environment:
+      POSTGRES_DB: event_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - event-db-data:/var/lib/postgresql/data
+    networks:
+      - event-management-network
+
+  postgres-booking:
+    image: postgres:15-alpine
+    container_name: postgres-booking-db
+    environment:
+      POSTGRES_DB: booking_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - booking-db-data:/var/lib/postgresql/data
+    networks:
+      - event-management-network
+
+  # RabbitMQ Message Broker
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # AMQP port
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - event-management-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # User Service
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    container_name: user-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-user:5432/user_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - postgres-user
+    networks:
+      - event-management-network
+
+  # Event Service
+  event-service:
+    build:
+      context: ./event-service
+      dockerfile: Dockerfile
+    container_name: event-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-event:5432/event_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      USER_SERVICE_URL: http://user-service:8081
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgres-event:
+        condition: service_started
+      user-service:
+        condition: service_started
+    networks:
+      - event-management-network
+
+  # Booking Service
+  booking-service:
+    build:
+      context: ./booking-service
+      dockerfile: Dockerfile
+    container_name: booking-service
+    ports:
+      - "8083:8083"
+    environment:
+      SERVER_PORT: 8083
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-booking:5432/booking_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      USER_SERVICE_URL: http://user-service:8081
+      EVENT_SERVICE_URL: http://event-service:8082
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgres-booking:
+        condition: service_started
+      user-service:
+        condition: service_started
+      event-service:
+        condition: service_started
+    networks:
+      - event-management-network
+
+networks:
+  event-management-network:
+    driver: bridge
+
+volumes:
+  user-db-data:
+  event-db-data:
+  booking-db-data:
