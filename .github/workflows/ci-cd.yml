@@ -112,19 +112,19 @@ jobs:
         working-directory: ./event-management-system
         run: |
           docker --version
-          docker-compose --version
+          docker compose --version
 
       - name: Validate Docker Compose Configuration
         working-directory: ./event-management-system
         run: |
-          docker-compose config
+          docker compose config
 
       # Start services
       - name: Deploy Services with Docker Compose
         working-directory: ./event-management-system  
         run: |
           echo "Starting deployment..."
-          docker-compose up -d --build
+          docker compose up -d --build
           echo "Waiting for services to start..."
           sleep 30
 
@@ -169,7 +169,7 @@ jobs:
         if: always()
         working-directory: ./event-management-system
         run: |
-          docker-compose down -v
+          docker compose down -v
           echo "Cleanup completed"
 
   # Job 4: Notify Success
